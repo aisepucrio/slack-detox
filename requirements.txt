@@ -1,0 +1,22 @@
+# Dependências para Pipeline de Anonimização 100% LOCAL
+# Todas as dependências são para processamento local, sem APIs externas
+
+# BERT e Transformers (processamento local)
+torch>=1.9.0
+transformers>=4.20.0
+tokenizers>=0.12.0
+
+# Processamento de texto
+spacy>=3.4.0
+
+# Utilitários básicos
+regex>=2022.7.9
+numpy>=1.21.0
+
+# Para instalar modelo português do spaCy (execute após instalação):
+# python -m spacy download pt_core_news_sm
+
+# IMPORTANTE: 
+# - Todas as dependências funcionam offline após primeira instalação
+# - Modelos BERT são baixados uma vez e ficam em cache local
+# - Nenhuma API externa é utilizada durante o processamento

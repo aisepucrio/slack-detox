@@ -1,0 +1,2 @@
+[DD/MM/YY, HH:MM:SS] Nome: Mensagem
+[DD/MM/YY, HH:MM:SS] +55 11 99999-9999: Mensagem
