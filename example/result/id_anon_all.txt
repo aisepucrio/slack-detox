@@ -1,0 +1,30 @@
+📨 Original:
+[23/07/2025 19:56] vide: oi, johny!
+🔒 Anonimizada:
+[23/07/2025 19:56] vide: oi, johny!
+--------------------------------------------------
+📨 Original:
+[23/07/2025 19:56] vide: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
+🔒 Anonimizada:
+[23/07/2025 19:56] vide: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
+--------------------------------------------------
+📨 Original:
+[23/07/2025 19:56] vide: o coutinho vai estar presente?
+🔒 Anonimizada:
+[23/07/2025 19:56] vide: o coutinho vai estar presente?
+--------------------------------------------------
+📨 Original:
+[23/07/2025 19:58] johny: Oi Theo
+🔒 Anonimizada:
+[23/07/2025 19:58] johny: Oi Theo
+--------------------------------------------------
+📨 Original:
+[23/07/2025 19:59] johny: Vai sim, adiciona ele no invite
+🔒 Anonimizada:
+[23/07/2025 19:59] johny: Vai sim, adiciona ele no invite
+--------------------------------------------------
+📨 Original:
+[23/07/2025 19:59] johny: coutinho@email.com.br
+🔒 Anonimizada:
+[23/07/2025 19:59] johny: coutinho@email.com.br
+--------------------------------------------------
