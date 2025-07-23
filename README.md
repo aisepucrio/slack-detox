@@ -122,11 +122,36 @@ projeto/
 │   ├── chat_original.txt        # Arquivo de chat (obrigatório)
 │   ├── apelidos_lista.txt       # Lista de apelidos
 │   └── whitelist.txt            # Palavras protegidas
+├── example/                     # Pasta com dados de exemplo
+│   ├── data/                    # Dados mock para teste
+│   └── result/                  # Resultados da pipeline de exemplo
 ├── result/                      # Gerado automaticamente
 ├── src/                         # Código-fonte da pipeline
 ├── main.py                      # Script principal
 └── README.md
 ```
+
+---
+
+## 📁 Exemplo Prático
+
+Para facilitar o entendimento, incluímos uma pasta `example/` com dados mock e os resultados completos da pipeline de anonimização:
+
+### Dados de Exemplo (`example/data/`)
+
+* **`chat_original.txt`**: Conversa de exemplo entre "vide", "johny" e menções ao "coutinho"
+* **`apelidos_lista.txt`**: Contém "Coutinho" como apelido a ser anonimizado
+* **`whitelist.txt`**: Protege a palavra "Jira" da anonimização
+
+### Resultados da Pipeline (`example/result/`)
+
+Todos os arquivos gerados pelas 4 etapas da pipeline, mostrando como:
+* Nomes de usuários são substituídos por `[PESSOA]`
+* E-mails são anonimizados para `[EMAIL]`
+* A palavra "Jira" é preservada (whitelist)
+* Apelidos como "coutinho" são corretamente identificados
+
+**Dica**: Examine os arquivos em `example/result/` para entender como cada etapa transforma o texto original.
 
 ---
 
