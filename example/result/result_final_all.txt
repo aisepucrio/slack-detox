@@ -1,30 +1,18 @@
-📨 Original:
-[23/07/2025 19:56] vide: oi, johny!
-🔒 Anonimizada:
-[23/07/2025 19:56] [PESSOA]: oi, [PESSOA]!
---------------------------------------------------
-📨 Original:
-[23/07/2025 19:56] vide: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
-🔒 Anonimizada:
-[23/07/2025 19:56] [PESSOA]: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
---------------------------------------------------
-📨 Original:
-[23/07/2025 19:56] vide: o coutinho vai estar presente?
-🔒 Anonimizada:
-[23/07/2025 19:56] [PESSOA]: o [PESSOA] vai estar presente?
---------------------------------------------------
-📨 Original:
-[23/07/2025 19:58] johny: Oi Theo
-🔒 Anonimizada:
-[23/07/2025 19:58] [PESSOA]: Oi [PESSOA]
---------------------------------------------------
-📨 Original:
-[23/07/2025 19:59] johny: Vai sim, adiciona ele no invite
-🔒 Anonimizada:
-[23/07/2025 19:59] [PESSOA]: Vai sim, adiciona ele no invite
---------------------------------------------------
-📨 Original:
-[23/07/2025 19:59] johny: coutinho@email.com.br
-🔒 Anonimizada:
-[23/07/2025 19:59] [PESSOA]: [EMAIL]
---------------------------------------------------
+ORIGINAL: [23/07/2025 19:56] user_1: oi, johny!
+ANONIMIZADO: [23/07/2025 19:56] user_1: oi, [PESSOA]!
+==================================================
+ORIGINAL: [23/07/2025 19:56] user_1: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
+ANONIMIZADO: [23/07/2025 19:56] user_1: como ficou decidido sobre a reunião de amanhã? Já atualizei o Jira!
+==================================================
+ORIGINAL: [23/07/2025 19:56] user_1: o [PESSOA] vai estar presente?
+ANONIMIZADO: [23/07/2025 19:56] user_1: o [PESSOA] vai estar presente?
+==================================================
+ORIGINAL: [23/07/2025 19:58] user_2: Oi Theo
+ANONIMIZADO: [23/07/2025 19:58] user_2: Oi [PESSOA]
+==================================================
+ORIGINAL: [23/07/2025 19:59] user_2: Vai sim, adiciona ele no invite
+ANONIMIZADO: [23/07/2025 19:59] user_2: Vai sim, adiciona ele no invite
+==================================================
+ORIGINAL: [23/07/2025 19:59] user_2: [EMAIL]
+ANONIMIZADO: [23/07/2025 19:59] user_2: [EMAIL]
+==================================================

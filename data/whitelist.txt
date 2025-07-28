@@ -1,0 +1,10 @@
+# Uma palavra por linha
+# Palavras que NÃO serão anonimizadas
+
+# Exemplo:
+# jira
+# github
+# zoom
+# overleaf
+# figma
+# google

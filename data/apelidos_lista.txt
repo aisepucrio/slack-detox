@@ -1,0 +1,8 @@
+# Um apelido por linha
+# Palavras que serão substituídas por PESSOA
+
+# Exemplo:
+# João
+# Maria
+# Pereira
+# Fofucho
