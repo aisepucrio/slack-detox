@@ -47,9 +47,12 @@ data/whitelist.txt
 Coloque seu arquivo de chat exportado aqui. Formato esperado:
 
 ```
-[DD/MM/YY, HH:MM:SS] Nome: Mensagem
-[DD/MM/YY, HH:MM:SS] +55 11 99999-9999: Mensagem
+[timestamp] sender: message
+[23/07/2025 19:56] vide: oi, johny!
+[23/07/2025 19:56] johny: Oi Theo
 ```
+
+**Nota**: O sistema assume que os dados já vêm estruturados neste formato genérico `(timestamp, sender, message)`.
 
 ### - Lista de Apelidos: `data/apelidos_lista.txt`
 
@@ -80,6 +83,12 @@ slides
 
 ```bash
 python main.py
+```
+
+### Usando dados de exemplo
+
+```bash
+python main.py --example
 ```
 
 ---
@@ -155,43 +164,100 @@ Todos os arquivos gerados pelas 4 etapas da pipeline, mostrando como:
 
 ---
 
-## 🚀 Etapas da Pipeline
+## 🏗️ Arquitetura Modular
+
+### Estrutura de Dados Unificada
+
+O sistema utiliza uma estrutura padronizada `(timestamp, sender, message)` e assume que os dados já vêm neste formato genérico:
+
+```python
+@dataclass
+class ChatMessage:
+    timestamp: str    # Data/hora da mensagem  
+    sender: str       # Nome do remetente
+    message: str      # Conteúdo da mensagem
+```
+
+### Pipeline de Anonimização
+
+O sistema processa mensagens já estruturadas através de 4 etapas:
+
+1. **ID Anonymizer** → Anonimiza senders e menções `@user`
+2. **Regex Anonymizer** → Remove dados sensíveis (CPF, email, etc.)
+3. **Apelidos** → Substitui apelidos por `[PESSOA]`
+4. **BERT Local** → IA para detecção de entidades nomeadas
+
+**Entrada esperada**: Dados já no formato `[timestamp] sender: message`  
+**Saída**: Mensagens totalmente anonimizadas
+
+---
+
+## � Estrutura Simplificada
+
+### Formato de Entrada Esperado
+
+O sistema foi projetado para trabalhar com dados **já estruturados** no formato genérico:
+
+```
+[timestamp] sender: message
+```
+
+**Exemplos válidos:**
+```
+[23/07/2025 19:56] vide: oi, johny!
+[2025-07-23 19:56:30] user123: mensagem de teste
+[23/07 19:56] João: como vai?
+```
+
+### Arquivos Principais
+
+```
+src/
+├── chat_message.py          # Estrutura ChatMessage simplificada
+├── pipeline.py              # Pipeline de 4 etapas
+├── id_anon.py               # Anonimização de IDs/senders
+├── regex_anon.py            # Regex para dados sensíveis
+├── apelidos.py              # Substituição de apelidos
+├── pt_bert_local.py         # BERT para entidades nomeadas
+├── utils.py                 # Utilitários
+└── whitelist.py             # Sistema de proteção
+```
+
+---
+
+## 🚀� Etapas da Pipeline
 
 ### Etapa 1: Anonimizador de IDs
 
 * Entrada: `data/chat_original.txt`
 * Saída:
-
   * `result/id_anon.txt`
   * `result/id_anon_all.txt`
-* Substitui números por `user_1`, `user_2`, etc.
+* Substitui senders e menções por `[PESSOA]`
 
 ### Etapa 2: Regex Anonymizer
 
 * Entrada: `result/id_anon.txt`
 * Saída:
-
   * `result/pre_processado.txt`
   * `result/pre_processado_all.txt`
-* Usa padrões regex para anonimizar dados sensíveis
+* Usa padrões regex para anonimizar dados sensíveis (CPF, email, telefone, etc.)
 
 ### Etapa 3: Substituição de Apelidos
 
 * Entrada: `result/pre_processado.txt`
 * Saída:
-
   * `result/apelidos_anon.txt`
   * `result/apelidos_anon_all.txt`
-* Troca apelidos da lista por `PESSOA`
+* Troca apelidos da lista por `[PESSOA]`
 
 ### Etapa 4: BERT Local
 
 * Entrada: `result/apelidos_anon.txt`
 * Saída:
-
   * `result/result_final.txt` ⭐
   * `result/result_final_all.txt`
-* Usa IA local para anonimização final de entidades
+* Usa IA local para detecção e anonimização de entidades nomeadas
 
 ---
 
@@ -229,7 +295,14 @@ Resultado: "Vamos usar o jira para organizar"
 
 ### Arquivo não encontrado
 
-* Verifique `data/chat_original.txt`
+* Verifique se `data/chat_original.txt` existe
+* Certifique-se que o formato está correto: `[timestamp] sender: message`
+
+### Formato de dados incorreto
+
+* O sistema espera dados já estruturados no formato genérico
+* Converta manualmente dados de WhatsApp/Slack/Discord antes de processar
+* Verifique se cada linha segue o padrão: `[timestamp] sender: message`
 
 ### Módulos não encontrados
 
@@ -274,29 +347,35 @@ python main.py
 
 ```
 🚀 Iniciando pipeline de anonimização...
-📝 Apelidos carregados: Pereira, bolota, coutinho
-🛡️  Palavras protegidas: jira, github, eduardo, zoom, overleaf, figma, stone, google, slides
+📝 Apelidos carregados: Coutinho
+🛡️  Palavras protegidas: Jira
 ============================================================
 📁 Etapa 1: data/chat_original.txt -> result/id_anon.txt + result/id_anon_all.txt
-✅ Etapa 1 concluída!
+✅ Etapa 1 concluída! Arquivos gerados:
+   - result/id_anon.txt
+   - result/id_anon_all.txt
 ============================================================
 📁 Etapa 2: result/id_anon.txt -> result/pre_processado.txt + result/pre_processado_all.txt
-✅ Etapa 2 concluída!
+✅ Etapa 2 concluída! Arquivos gerados:
+   - result/pre_processado.txt
+   - result/pre_processado_all.txt
 ============================================================
 📁 Etapa 3: result/pre_processado.txt -> result/apelidos_anon.txt + result/apelidos_anon_all.txt
-✅ Etapa 3 concluída!
+✅ Etapa 3 concluída! Arquivos gerados:
+   - result/apelidos_anon.txt
+   - result/apelidos_anon_all.txt
 ============================================================
 📁 Etapa 4: result/apelidos_anon.txt -> result/result_final.txt + result/result_final_all.txt
-🤖 Processando com BERT LOCAL...
-✅ Etapa 4 concluída!
+✅ Etapa 4 concluída! Arquivos gerados:
+   - result/result_final.txt
+   - result/result_final_all.txt
 ============================================================
 🎉 Pipeline de anonimização finalizado com sucesso!
-
-📊 Resumo:
+📊 Resumo dos arquivos gerados:
    🆔 result/id_anon.txt - Mensagens anonimizadas por ID
-   🔧 result/pre_processado.txt - Anonimizadas por regex
-   😎 result/apelidos_anon.txt - Apelidos substituídos
-   🎯 result/result_final.txt - Resultado final ⭐
+   🔧 result/pre_processado.txt - Mensagens anonimizadas por regex
+   😎 result/apelidos_anon.txt - Mensagens com apelidos substituídos
+   🎯 result/result_final.txt - Resultado final da anonimização ⭐
 ```
 
 ---
