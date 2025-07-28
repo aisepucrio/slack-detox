@@ -2,7 +2,7 @@ import re
 
 patterns = {
     "CPF": r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b",
-    "email": r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+",
+    "email": r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-_]+\.[a-zA-Z0-9-.]+",
     "telefone": r"@?(?:\+?55)?\d{10,11}\b",
     "endereco": r"\b(rua|av\.?|avenida|travessa|estrada)\s+[^\d\n,]+[\d,]{0,10}",
     "chave_api": r"(?<!\S)[A-Za-z0-9_=-]{20,}(?!\S)",
@@ -14,7 +14,7 @@ patterns = {
     ),
 }
 
-sender_pattern = r"\[\d{1,2}/\d{1,2}/\d{2,4}, .*?\] ([^:]+):"
+sender_pattern = r"\[\d{1,2}/\d{1,2}/\d{2,4}[, ]+.*?\] ([^:]+):"
 
 def anonymize_message(msg):
     msg = msg.strip()

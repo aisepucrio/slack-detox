@@ -6,31 +6,31 @@ from src.utils import load_apelidos_from_file
 def main():
     
     # Criar diretórios se não existirem
-    os.makedirs("result", exist_ok=True)
+    os.makedirs("example/result", exist_ok=True)
     
     # Arquivos de entrada e saída
-    input_file = "data/chat_original.txt"
+    input_file = "example/data/chat_original.txt"
     
     # Etapa 1: Processamento com ID
-    id_clean = "result/id_anon.txt"
-    id_all = "result/id_anon_all.txt"
+    id_clean = "example/result/id_anon.txt"
+    id_all = "example/result/id_anon_all.txt"
     
     # Etapa 2: Processamento com Regex
-    regex_clean = "result/pre_processado.txt"
-    regex_all = "result/pre_processado_all.txt"
+    regex_clean = "example/result/pre_processado.txt"
+    regex_all = "example/result/pre_processado_all.txt"
     
     # Etapa 3: Processamento com Apelidos
-    apelidos_clean = "result/apelidos_anon.txt"
-    apelidos_all = "result/apelidos_anon_all.txt"
+    apelidos_clean = "example/result/apelidos_anon.txt"
+    apelidos_all = "example/result/apelidos_anon_all.txt"
     
     # Etapa 4: Processamento com BERT (resultado final)
-    bert_clean = "result/result_final.txt"
-    bert_all = "result/result_final_all.txt"
+    bert_clean = "example/result/result_final.txt"
+    bert_all = "example/result/result_final_all.txt"
     
     # Carregar listas dos arquivos
-    apelidos_lista = load_apelidos_from_file("data/apelidos_lista.txt")
-    whitelist = load_whitelist_from_file("data/whitelist.txt")
-    
+    apelidos_lista = load_apelidos_from_file("example/data/apelidos_lista.txt")
+    whitelist = load_whitelist_from_file("example/data/whitelist.txt")
+
     print("🚀 Iniciando pipeline de anonimização...")
     print(f"� Apelidos carregados: {', '.join(apelidos_lista) if apelidos_lista else 'Nenhum'}")
     print(f"�🛡️  Palavras protegidas: {', '.join(whitelist) if whitelist else 'Nenhuma'}")
