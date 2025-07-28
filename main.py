@@ -1,44 +1,57 @@
 import os
+import sys
 from src.pipeline import process_with_id, process_with_regex, process_with_apelidos, process_with_bert
 from src.whitelist import load_whitelist_from_file
 from src.utils import load_apelidos_from_file
 
 def main():
+    # Detectar se é para usar os arquivos de exemplo ou da pasta data
+    use_example = len(sys.argv) > 1 and sys.argv[1] == "--example"
+    
+    if use_example:
+        print("🧪 Usando dados de exemplo...")
+        base_path = "example"
+    else:
+        print("📁 Usando dados da pasta data...")
+        base_path = "data"
     
     # Criar diretórios se não existirem
-    os.makedirs("example/result", exist_ok=True)
+    os.makedirs(f"{base_path}/result", exist_ok=True)
     
     # Arquivos de entrada e saída
-    input_file = "example/data/chat_original.txt"
+    input_file = f"{base_path}/data/chat_original.txt"
     
     # Etapa 1: Processamento com ID
-    id_clean = "example/result/id_anon.txt"
-    id_all = "example/result/id_anon_all.txt"
+    id_clean = f"{base_path}/result/id_anon.txt"
+    id_all = f"{base_path}/result/id_anon_all.txt"
     
     # Etapa 2: Processamento com Regex
-    regex_clean = "example/result/pre_processado.txt"
-    regex_all = "example/result/pre_processado_all.txt"
+    regex_clean = f"{base_path}/result/pre_processado.txt"
+    regex_all = f"{base_path}/result/pre_processado_all.txt"
     
     # Etapa 3: Processamento com Apelidos
-    apelidos_clean = "example/result/apelidos_anon.txt"
-    apelidos_all = "example/result/apelidos_anon_all.txt"
+    apelidos_clean = f"{base_path}/result/apelidos_anon.txt"
+    apelidos_all = f"{base_path}/result/apelidos_anon_all.txt"
     
     # Etapa 4: Processamento com BERT (resultado final)
-    bert_clean = "example/result/result_final.txt"
-    bert_all = "example/result/result_final_all.txt"
+    bert_clean = f"{base_path}/result/result_final.txt"
+    bert_all = f"{base_path}/result/result_final_all.txt"
     
     # Carregar listas dos arquivos
-    apelidos_lista = load_apelidos_from_file("example/data/apelidos_lista.txt")
-    whitelist = load_whitelist_from_file("example/data/whitelist.txt")
+    apelidos_lista = load_apelidos_from_file(f"{base_path}/data/apelidos_lista.txt")
+    whitelist = load_whitelist_from_file(f"{base_path}/data/whitelist.txt")
 
     print("🚀 Iniciando pipeline de anonimização...")
-    print(f"� Apelidos carregados: {', '.join(apelidos_lista) if apelidos_lista else 'Nenhum'}")
-    print(f"�🛡️  Palavras protegidas: {', '.join(whitelist) if whitelist else 'Nenhuma'}")
+    print(f"📝 Apelidos carregados: {', '.join(apelidos_lista) if apelidos_lista else 'Nenhum'}")
+    print(f"🛡️  Palavras protegidas: {', '.join(whitelist) if whitelist else 'Nenhuma'}")
     print("=" * 60)
     
     # Verificar se o arquivo de entrada existe
     if not os.path.exists(input_file):
         print(f"❌ Erro: Arquivo {input_file} não encontrado!")
+        print("💡 Uso:")
+        print("   python main.py                    # Usa dados da pasta data/")
+        print("   python main.py --example          # Usa dados de exemplo")
         return
     
     # Etapa 1: Processamento com ID
@@ -88,10 +101,13 @@ def main():
     print(f"   😎 {apelidos_all} - Formato completo com apelidos")
     
     if bert_success:
-        print(f"   🎯 {bert_clean} - Resultado final da anonimização")
+        print(f"   🎯 {bert_clean} - Resultado final da anonimização ⭐")
         print(f"   🎯 {bert_all} - Formato completo final")
     else:
         print("   ⚠️  Arquivos finais não gerados (dependências BERT não disponíveis)")
+    
+    print("\n💡 Dica: Para testar com dados de exemplo, use:")
+    print("   python main.py --example")
 
 if __name__ == "__main__":
     main()

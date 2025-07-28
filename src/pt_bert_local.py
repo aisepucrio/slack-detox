@@ -147,6 +147,41 @@ class LocalBertAnonymizer:
         
         return "".join(result)
 
+def anonymize_chat_message_bert(msg):
+    """Anonimiza uma mensagem estruturada usando BERT"""
+    # Import aqui para evitar circular import
+    from .chat_message import ChatMessage
+    
+    if not isinstance(msg, ChatMessage):
+        return msg
+    
+    # Anonimiza apenas o conteúdo da mensagem com BERT
+    # O sender já deve ter sido anonimizado em etapas anteriores
+    anonymized_message = anonymize_text(msg.message)
+    
+    return ChatMessage(
+        timestamp=msg.timestamp,
+        sender=msg.sender,  # Mantém sender como está (já anonimizado)
+        message=anonymized_message,
+        original_sender=msg.original_sender if hasattr(msg, 'original_sender') else msg.sender,
+        original_message=msg.original_message if hasattr(msg, 'original_message') else msg.message
+    )
+
+def anonymize_messages_bert(messages: list) -> list:
+    """Anonimiza uma lista de mensagens usando BERT"""
+    result = []
+    
+    for msg in messages:
+        if hasattr(msg, 'timestamp'):  # É ChatMessage
+            result.append(anonymize_chat_message_bert(msg))
+        elif isinstance(msg, str):
+            # Para compatibilidade com código legado
+            result.append(anonymize_text(msg))
+        else:
+            result.append(msg)
+    
+    return result
+
 # Instância global do anonimizador
 _anonymizer = None
 
