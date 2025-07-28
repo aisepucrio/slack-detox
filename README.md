@@ -192,7 +192,7 @@ O sistema processa mensagens já estruturadas através de 4 etapas:
 
 ---
 
-## � Estrutura Simplificada
+## 🎲 Estrutura Simplificada
 
 ### Formato de Entrada Esperado
 
@@ -225,7 +225,7 @@ src/
 
 ---
 
-## 🚀� Etapas da Pipeline
+## 🚀 Etapas da Pipeline
 
 ### Etapa 1: Anonimizador de IDs
 
